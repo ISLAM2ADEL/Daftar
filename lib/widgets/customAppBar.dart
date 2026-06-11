@@ -1,4 +1,4 @@
-import 'package:daftra/widgets/CustomText.dart';
+import 'package:daftra/widgets/customText.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -18,10 +18,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: Builder(
         builder: (context) => IconButton(
-          color: const Color(0xFF0F172A),
           icon: Icon(leadingicon),
           onPressed: () {
-            onLeadingPressed!();
+            if (onLeadingPressed != null) onLeadingPressed!();
           },
         ),
       ),
@@ -29,16 +28,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: CustomText(
           text: text,
           isBold: true,
-          colours: 0xFF0F172A,
+          color: Theme.of(context).appBarTheme.titleTextStyle?.color,
           fontSize: 20,
           align: TextAlign.center,
         ),
       ),
-      backgroundColor: const Color(0xFFFFFFFF),
       actions: [
         IconButton(
           icon:  Icon(trailingicon),
-          color: const Color(0xFF0F172A),
           onPressed: () {
           },
         ),

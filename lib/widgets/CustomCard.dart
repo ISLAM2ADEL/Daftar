@@ -1,17 +1,17 @@
-import 'package:daftra/widgets/CustomListTile.dart';
+import 'package:daftra/widgets/customListTile.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomCard extends StatelessWidget {
-  final int colours;
-  final int textcolours;
+  final Color? color;
+  final Color? textColor;
   final Widget suffix;
   final String text;
   final void Function()? tapped;
   const CustomCard({
     super.key,
-    required this.colours,
-    required this.textcolours,
+    this.color,
+    this.textColor,
     required this.text,
     required this.suffix,
     required this.tapped,
@@ -19,11 +19,11 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color(colours),
+      color: color ?? Theme.of(context).colorScheme.surface,
       margin: const EdgeInsets.all(15),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       child: CustomListTile(
-        colours: textcolours,
+        color: textColor,
         text: text,
         suffix: suffix,
         tapped: tapped,

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 
 class CustomListTile extends StatelessWidget {
-  final int colours;
+  final Color? color;
   final Widget suffix;
   final String text;
   final void Function()? tapped;
   const CustomListTile({
     super.key,
-    required this.colours,
+    this.color,
     required this.text,
     required this.suffix,
     required this.tapped,
@@ -25,7 +25,7 @@ class CustomListTile extends StatelessWidget {
           fontSize: MediaQuery.orientationOf(context) == Orientation.portrait
               ? MediaQuery.sizeOf(context).width * 0.04
               : MediaQuery.sizeOf(context).width * 0.02,
-          color: Color(colours),
+          color: color ?? Theme.of(context).colorScheme.onSurface,
         ),
       ),
     );

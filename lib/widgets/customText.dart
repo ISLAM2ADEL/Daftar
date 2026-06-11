@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class CustomText extends StatelessWidget {
   final String text;
   final bool isBold;
-  final int colours;
+  final Color? color;
   final double fontSize;
   final TextAlign align;
   const CustomText({
     super.key,
     required this.text,
     required this.isBold,
-    required this.colours,
+    this.color,
     required this.fontSize,
     required this.align,
   });
@@ -22,7 +22,7 @@ class CustomText extends StatelessWidget {
         fontFamily: 'IBMPlexSans',
         fontWeight: isBold ? FontWeight.bold : null,
         fontSize: fontSize,
-        color: Color(colours),
+        color: color ?? Theme.of(context).colorScheme.onSurface,
       ),
       textAlign: align,
     );
