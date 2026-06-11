@@ -1,14 +1,14 @@
-import 'package:daftra/screens/signup.dart';
 import 'package:daftra/utils/labelTextForm.dart';
 import 'package:daftra/widgets/customText.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Signup extends StatelessWidget {
+  const Signup({super.key});
 
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+    String passowrdText = '';
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -22,7 +22,7 @@ class Login extends StatelessWidget {
               child: Column(
                 children: [
                   CustomText(
-                    text: "تسجيل الدخول",
+                    text: "انشاء حساب جديد",
                     isBold: true,
                     fontSize:
                         MediaQuery.orientationOf(context) ==
@@ -36,8 +36,51 @@ class Login extends StatelessWidget {
                     height:
                         MediaQuery.orientationOf(context) ==
                             Orientation.portrait
-                        ? MediaQuery.sizeOf(context).width * 0.2
-                        : MediaQuery.sizeOf(context).width * 0.05,
+                        ? MediaQuery.sizeOf(context).width * 0.025
+                        : MediaQuery.sizeOf(context).width * 0.012,
+                  ),
+                  CustomText(
+                    text: "أدخل بيانتك للبدء في ادارة دفترك",
+                    isBold: false,
+                    fontSize:
+                        MediaQuery.orientationOf(context) ==
+                            Orientation.portrait
+                        ? MediaQuery.sizeOf(context).width * 0.04
+                        : MediaQuery.sizeOf(context).width * 0.023,
+                    color: Theme.of(context).colorScheme.onSurface,
+                    align: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height:
+                        MediaQuery.orientationOf(context) ==
+                            Orientation.portrait
+                        ? MediaQuery.sizeOf(context).width * 0.1
+                        : MediaQuery.sizeOf(context).width * 0.03,
+                  ),
+                  Labeltextform(
+                    text: "اسم المحل",
+                    isBold: true,
+                    fontSize:
+                        MediaQuery.orientationOf(context) ==
+                            Orientation.portrait
+                        ? MediaQuery.sizeOf(context).width * 0.03
+                        : MediaQuery.sizeOf(context).width * 0.02,
+                    suffix: const Icon(Icons.store_mall_directory_rounded),
+                    textform: "مثال: محل البقالة",
+                    validator: (value) {
+                      passowrdText = value!;
+                      if (value.isEmpty) {
+                        return "برجاء ادخال اسم المحل";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height:
+                        MediaQuery.orientationOf(context) ==
+                            Orientation.portrait
+                        ? MediaQuery.sizeOf(context).width * 0.05
+                        : MediaQuery.sizeOf(context).width * 0.025,
                   ),
                   Labeltextform(
                     text: "رقم الهاتف",
@@ -50,8 +93,9 @@ class Login extends StatelessWidget {
                     suffix: const Icon(Icons.phone_android_rounded),
                     textform: "ادخل رقم الهاتف مثل 01012345678",
                     validator: (value) {
+                      passowrdText = value!;
                       final RegExp phoneRegx = RegExp(r'^01[0125][0-9]{8}$');
-                      if (value == null || value.isEmpty) {
+                      if (value.isEmpty) {
                         return 'برجاء ادخال رقم الهاتف';
                       } else if (!phoneRegx.hasMatch(value)) {
                         return 'برجاء ادخال رقم هاتف صحيح';
@@ -89,7 +133,40 @@ class Login extends StatelessWidget {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(
+                    height:
+                        MediaQuery.orientationOf(context) ==
+                            Orientation.portrait
+                        ? MediaQuery.sizeOf(context).width * 0.05
+                        : MediaQuery.sizeOf(context).width * 0.025,
+                  ),
+                  Labeltextform(
+                    text: "تأكيد كلمة المرور",
+                    isBold: true,
+                    fontSize:
+                        MediaQuery.orientationOf(context) ==
+                            Orientation.portrait
+                        ? MediaQuery.sizeOf(context).width * 0.03
+                        : MediaQuery.sizeOf(context).width * 0.02,
+                    suffix: const Icon(Icons.lock),
+                    textform: "برجاء ادخال نفس كلمة المرور",
+                    isObscure: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'برجاء ادخال كلمة المرور';
+                      } else if (value != passowrdText) {
+                        return 'برجاء ادخال نفس كلمة المرور';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height:
+                        MediaQuery.orientationOf(context) ==
+                            Orientation.portrait
+                        ? MediaQuery.sizeOf(context).width * 0.05
+                        : MediaQuery.sizeOf(context).width * 0.025,
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
@@ -105,7 +182,7 @@ class Login extends StatelessWidget {
                       ),
                     ),
                     child: CustomText(
-                      text: "تسجيل الدخول",
+                      text: "انشاء حساب جديد",
                       isBold: true,
                       color: Theme.of(context).colorScheme.surface,
                       fontSize: 15,
@@ -120,16 +197,10 @@ class Login extends StatelessWidget {
                         : MediaQuery.sizeOf(context).width * 0.025,
                   ),
                   InkWell(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Signup(),
-                        ),
-                      );
-                    },
+                    onTap: () =>
+                        Navigator.pushReplacementNamed(context, '/login'),
                     child: CustomText(
-                      text: "ليس لديك حساب؟ سجل الأن",
+                      text: "لديك حساب بالفعل؟؟ تسجيل الدخول",
                       isBold: false,
                       align: TextAlign.center,
                       fontSize:

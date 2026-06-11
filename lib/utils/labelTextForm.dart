@@ -9,6 +9,7 @@ class Labeltextform extends StatelessWidget {
   final Widget suffix;
   final String textform;
   final String? Function(String?)? validator;
+  final bool? isObscure;
   const Labeltextform({
     super.key,
     required this.text,
@@ -17,6 +18,7 @@ class Labeltextform extends StatelessWidget {
     required this.suffix,
     required this.textform,
     this.validator,
+    this.isObscure
   });
 
   @override
@@ -32,7 +34,7 @@ class Labeltextform extends StatelessWidget {
           align: TextAlign.right,
         ),
         const SizedBox(height: 5),
-        CustomTextform(text: textform, suffix: suffix, validator: validator),
+        CustomTextform(text: textform, suffix: suffix, validator: validator,),
       ],
     );
   }

@@ -3,18 +3,21 @@ import 'package:flutter/material.dart';
 class CustomTextform extends StatelessWidget {
   final Widget suffix;
   final String text;
+  final bool? isObscure;
   final String? Function(String?)? validator;
   const CustomTextform({
     super.key,
     required this.suffix,
     required this.text,
     this.validator,
+    this.isObscure,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       textAlign: TextAlign.right,
+      obscureText: isObscure ?? false,
       decoration: InputDecoration(
         hintText: text.toString(),
         hintStyle: TextStyle(
