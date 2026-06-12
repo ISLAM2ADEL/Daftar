@@ -8,11 +8,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onLeadingPressed,
     this.leadingicon,
     this.trailingicon,
+    this.onTrailingPressed,
   });
   final String text;
   final IconData? leadingicon;
   final IconData? trailingicon;
   final void Function()? onLeadingPressed;
+  final void Function()? onTrailingPressed;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -33,13 +35,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           align: TextAlign.center,
         ),
       ),
-      actions: [
-        IconButton(
-          icon:  Icon(trailingicon),
-          onPressed: () {
-          },
-        ),
-      ],
+      actions: [IconButton(icon: Icon(trailingicon), onPressed: () {})],
     );
   }
 

@@ -59,12 +59,6 @@ class Signup extends StatelessWidget {
                   ),
                   Labeltextform(
                     text: "اسم المحل",
-                    isBold: true,
-                    fontSize:
-                        MediaQuery.orientationOf(context) ==
-                            Orientation.portrait
-                        ? MediaQuery.sizeOf(context).width * 0.03
-                        : MediaQuery.sizeOf(context).width * 0.02,
                     suffix: const Icon(Icons.store_mall_directory_rounded),
                     textform: "مثال: محل البقالة",
                     validator: (value) {
@@ -84,13 +78,7 @@ class Signup extends StatelessWidget {
                   ),
                   Labeltextform(
                     text: "رقم الهاتف",
-                    isBold: true,
-                    fontSize:
-                        MediaQuery.orientationOf(context) ==
-                            Orientation.portrait
-                        ? MediaQuery.sizeOf(context).width * 0.03
-                        : MediaQuery.sizeOf(context).width * 0.02,
-                    suffix: const Icon(Icons.phone_android_rounded),
+                    suffix: const Icon(Icons.phone),
                     textform: "ادخل رقم الهاتف مثل 01012345678",
                     validator: (value) {
                       passowrdText = value!;
@@ -112,12 +100,6 @@ class Signup extends StatelessWidget {
                   ),
                   Labeltextform(
                     text: "كلمة المرور",
-                    isBold: true,
-                    fontSize:
-                        MediaQuery.orientationOf(context) ==
-                            Orientation.portrait
-                        ? MediaQuery.sizeOf(context).width * 0.03
-                        : MediaQuery.sizeOf(context).width * 0.02,
                     suffix: const Icon(Icons.lock),
                     textform: "ادخل كلمة المرور يتكون من 8 حروف علي الاقل",
                     isObscure: true,
@@ -142,12 +124,6 @@ class Signup extends StatelessWidget {
                   ),
                   Labeltextform(
                     text: "تأكيد كلمة المرور",
-                    isBold: true,
-                    fontSize:
-                        MediaQuery.orientationOf(context) ==
-                            Orientation.portrait
-                        ? MediaQuery.sizeOf(context).width * 0.03
-                        : MediaQuery.sizeOf(context).width * 0.02,
                     suffix: const Icon(Icons.lock),
                     textform: "برجاء ادخال نفس كلمة المرور",
                     isObscure: true,
@@ -181,12 +157,23 @@ class Signup extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                    child: CustomText(
-                      text: "انشاء حساب جديد",
-                      isBold: true,
-                      color: Theme.of(context).colorScheme.surface,
-                      fontSize: 15,
-                      align: TextAlign.center,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.arrow_forward,
+                          color: Theme.of(context).colorScheme.surface,
+                          size: 20,
+                        ),
+                        CustomText(
+                          text: "إنشاء حساب ",
+                          isBold: true,
+                          color: Theme.of(context).colorScheme.surface,
+                          fontSize: 16,
+                          align: TextAlign.center,
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(

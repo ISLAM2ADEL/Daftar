@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 
 class Labeltextform extends StatelessWidget {
   final String text;
-  final bool isBold;
-  final double fontSize;
   final Widget suffix;
   final String textform;
   final String? Function(String?)? validator;
@@ -13,12 +11,10 @@ class Labeltextform extends StatelessWidget {
   const Labeltextform({
     super.key,
     required this.text,
-    required this.isBold,
-    required this.fontSize,
     required this.suffix,
     required this.textform,
     this.validator,
-    this.isObscure
+    this.isObscure,
   });
 
   @override
@@ -28,13 +24,15 @@ class Labeltextform extends StatelessWidget {
       children: [
         CustomText(
           text: text,
-          fontSize: fontSize,
-          isBold: isBold,
+          isBold: true,
+          fontSize: MediaQuery.orientationOf(context) == Orientation.portrait
+              ? MediaQuery.sizeOf(context).width * 0.03
+              : MediaQuery.sizeOf(context).width * 0.02,
           color: Theme.of(context).colorScheme.onSurface,
           align: TextAlign.right,
         ),
         const SizedBox(height: 5),
-        CustomTextform(text: textform, suffix: suffix, validator: validator,),
+        CustomTextform(text: textform, suffix: suffix, validator: validator),
       ],
     );
   }

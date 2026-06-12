@@ -41,13 +41,7 @@ class Login extends StatelessWidget {
                   ),
                   Labeltextform(
                     text: "رقم الهاتف",
-                    isBold: true,
-                    fontSize:
-                        MediaQuery.orientationOf(context) ==
-                            Orientation.portrait
-                        ? MediaQuery.sizeOf(context).width * 0.03
-                        : MediaQuery.sizeOf(context).width * 0.02,
-                    suffix: const Icon(Icons.phone_android_rounded),
+                    suffix: const Icon(Icons.phone),
                     textform: "ادخل رقم الهاتف مثل 01012345678",
                     validator: (value) {
                       final RegExp phoneRegx = RegExp(r'^01[0125][0-9]{8}$');
@@ -68,12 +62,6 @@ class Login extends StatelessWidget {
                   ),
                   Labeltextform(
                     text: "كلمة المرور",
-                    isBold: true,
-                    fontSize:
-                        MediaQuery.orientationOf(context) ==
-                            Orientation.portrait
-                        ? MediaQuery.sizeOf(context).width * 0.03
-                        : MediaQuery.sizeOf(context).width * 0.02,
                     suffix: const Icon(Icons.lock),
                     textform: "ادخل كلمة المرور يتكون من 8 حروف علي الاقل",
                     isObscure: true,
@@ -89,7 +77,13 @@ class Login extends StatelessWidget {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(
+                    height:
+                        MediaQuery.orientationOf(context) ==
+                            Orientation.portrait
+                        ? MediaQuery.sizeOf(context).width * 0.05
+                        : MediaQuery.sizeOf(context).width * 0.025,
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
@@ -123,9 +117,7 @@ class Login extends StatelessWidget {
                     onTap: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => const Signup(),
-                        ),
+                        MaterialPageRoute(builder: (context) => const Signup()),
                       );
                     },
                     child: CustomText(
