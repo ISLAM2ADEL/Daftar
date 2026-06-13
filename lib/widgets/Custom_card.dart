@@ -1,4 +1,4 @@
-import 'package:daftra/widgets/customListTile.dart';
+import 'package:daftra/widgets/custom_listtile.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

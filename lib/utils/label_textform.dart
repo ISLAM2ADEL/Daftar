@@ -1,5 +1,5 @@
-import 'package:daftra/widgets/customText.dart';
-import 'package:daftra/widgets/customTextForm.dart';
+import 'package:daftra/widgets/custom_text.dart';
+import 'package:daftra/widgets/custom_textform.dart';
 import 'package:flutter/material.dart';
 
 class Labeltextform extends StatelessWidget {

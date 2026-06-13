@@ -1,8 +1,8 @@
-import 'package:daftra/widgets/customAppBar.dart';
-import 'package:daftra/widgets/customTextForm.dart';
-import 'package:daftra/widgets/custom_buttom_bar.dart';
+import 'package:daftra/widgets/custom_appbar.dart';
+import 'package:daftra/widgets/custom_textform.dart';
+import 'package:daftra/widgets/custom_buttonbar.dart';
 import 'package:daftra/widgets/custom_container.dart';
-import 'package:daftra/widgets/custom_customer_container.dart';
+import 'package:daftra/utils/custom_customer_container.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -50,7 +50,6 @@ class Home extends StatelessWidget {
                   child: CustomTextform(
                     text: "ابحث عن عميل ...",
                     suffix: const Icon(Icons.search),
-                    validator: (value) {},
                   ),
                 ),
               ),
