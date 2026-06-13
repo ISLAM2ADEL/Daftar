@@ -20,7 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: Builder(
         builder: (context) => IconButton(
-          icon: Icon(leadingicon),
+          icon: Icon(trailingicon),
           onPressed: () {
             if (onLeadingPressed != null) onLeadingPressed!();
           },
@@ -35,7 +35,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           align: TextAlign.center,
         ),
       ),
-      actions: [IconButton(icon: Icon(trailingicon), onPressed: () {})],
+      actions: [IconButton(icon: Icon(leadingicon), onPressed: () {})],
     );
   }
 

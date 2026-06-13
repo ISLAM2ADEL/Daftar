@@ -1,3 +1,4 @@
+import 'package:daftra/screens/home.dart';
 import 'package:daftra/screens/signup.dart';
 import 'package:daftra/utils/labelTextForm.dart';
 import 'package:daftra/widgets/customText.dart';
@@ -87,7 +88,10 @@ class Login extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        debugPrint("Form is valid! Proceeding to log in...");
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Home()),
+                        );
                       } else {
                         debugPrint("Form is invalid.");
                       }
