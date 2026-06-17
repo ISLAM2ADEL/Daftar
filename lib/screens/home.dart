@@ -1,3 +1,4 @@
+import 'package:daftra/widgets/add_payment_method.dart';
 import 'package:daftra/widgets/customAppBar.dart';
 import 'package:daftra/widgets/customTextForm.dart';
 import 'package:daftra/widgets/custom_buttom_bar.dart';
@@ -50,7 +51,9 @@ class Home extends StatelessWidget {
                   child: CustomTextform(
                     text: "ابحث عن عميل ...",
                     suffix: const Icon(Icons.search),
-                    validator: (value) {},
+                    validator: (value) {
+                      return null;
+                    },
                   ),
                 ),
               ),
@@ -107,10 +110,7 @@ class Home extends StatelessWidget {
         ),
       ),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: AddPaymentMethod(height: height),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: CustomBottomBar(),
