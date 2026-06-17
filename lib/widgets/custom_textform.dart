@@ -4,13 +4,16 @@ class CustomTextform extends StatelessWidget {
   final Widget suffix;
   final String text;
   final bool? isObscure;
+  final bool isNumber;
   final String? Function(String?)? validator;
+
   const CustomTextform({
     super.key,
     required this.suffix,
     required this.text,
     this.validator,
     this.isObscure,
+    this.isNumber = false,
   });
 
   @override
@@ -18,6 +21,7 @@ class CustomTextform extends StatelessWidget {
     return TextFormField(
       textAlign: TextAlign.right,
       obscureText: isObscure ?? false,
+      keyboardType: isNumber ? TextInputType.number : null,
       decoration: InputDecoration(
         hintText: text.toString(),
         hintStyle: TextStyle(

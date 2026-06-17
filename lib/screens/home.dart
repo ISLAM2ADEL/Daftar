@@ -1,3 +1,4 @@
+import 'package:daftra/widgets/add_payment_method.dart';
 import 'package:daftra/widgets/custom_appbar.dart';
 import 'package:daftra/widgets/custom_textform.dart';
 import 'package:daftra/widgets/custom_buttonbar.dart';
@@ -12,6 +13,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -22,8 +24,11 @@ class Home extends StatelessWidget {
                 leadingicon: Icons.search,
                 trailingicon: Icons.refresh_outlined,
               ),
-              Divider(color: Colors.grey),
+
+              const Divider(color: Colors.grey),
+
               SizedBox(height: height * .02),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -43,30 +48,35 @@ class Home extends StatelessWidget {
                   ),
                 ],
               ),
+
               SizedBox(height: height * .02),
+
               Padding(
-                padding: EdgeInsetsGeometry.symmetric(horizontal: width * .05),
-                child: SizedBox(
-                  child: CustomTextform(
-                    text: "ابحث عن عميل ...",
-                    suffix: const Icon(Icons.search),
-                  ),
+                padding: EdgeInsets.symmetric(horizontal: width * .05),
+                child: CustomTextform(
+                  text: "ابحث عن عميل ...",
+                  suffix: const Icon(Icons.search),
+                  validator: (value) {
+                    return null;
+                  },
                 ),
               ),
+
               SizedBox(height: height * .035),
+
               Container(
                 width: width * .9,
                 height: height * .055,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: BorderRadius.circular(10),
                   color: Theme.of(context).colorScheme.surface,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("سجل العملاء"),
+                      const Text("سجل العملاء"),
                       Text(
                         "عرض الكل",
                         style: TextStyle(
@@ -77,6 +87,7 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
+
               CustomCustomerContainer(
                 height: height,
                 width: width,
@@ -85,6 +96,7 @@ class Home extends StatelessWidget {
                 choice: 1,
                 money: '450 -',
               ),
+
               CustomCustomerContainer(
                 height: height,
                 width: width,
@@ -93,6 +105,7 @@ class Home extends StatelessWidget {
                 choice: 2,
                 money: '1,200 +',
               ),
+
               CustomCustomerContainer(
                 height: height,
                 width: width,
@@ -105,12 +118,7 @@ class Home extends StatelessWidget {
           ),
         ),
       ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
-
+      floatingActionButton: AddPaymentMethod(height: height),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: CustomBottomBar(),
     );
