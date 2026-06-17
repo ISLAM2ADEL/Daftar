@@ -1,7 +1,7 @@
 import 'package:daftra/screens/home.dart';
 import 'package:daftra/screens/signup.dart';
-import 'package:daftra/utils/labelTextForm.dart';
-import 'package:daftra/widgets/customText.dart';
+import 'package:daftra/utils/label_textform.dart';
+import 'package:daftra/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {

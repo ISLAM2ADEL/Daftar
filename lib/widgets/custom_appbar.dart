@@ -1,4 +1,4 @@
-import 'package:daftra/widgets/customText.dart';
+import 'package:daftra/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
