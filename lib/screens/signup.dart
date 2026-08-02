@@ -1,3 +1,4 @@
+import 'package:daftra/screens/login.dart';
 import 'package:daftra/utils/label_textform.dart';
 import 'package:daftra/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -184,8 +185,10 @@ class Signup extends StatelessWidget {
                         : MediaQuery.sizeOf(context).width * 0.025,
                   ),
                   InkWell(
-                    onTap: () =>
-                        Navigator.pushReplacementNamed(context, '/login'),
+                    onTap: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => const Login()),
+                    ),
                     child: CustomText(
                       text: "لديك حساب بالفعل؟؟ تسجيل الدخول",
                       isBold: false,

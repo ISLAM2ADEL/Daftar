@@ -15,17 +15,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData? trailingicon;
   final void Function()? onLeadingPressed;
   final void Function()? onTrailingPressed;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Builder(
-        builder: (context) => IconButton(
-          icon: Icon(trailingicon),
-          onPressed: () {
-            if (onLeadingPressed != null) onLeadingPressed!();
-          },
-        ),
-      ),
+      // Bug fix #2: leading shows leadingicon calling onLeadingPressed
+      leading: leadingicon != null
+          ? IconButton(
+              icon: Icon(leadingicon),
+              onPressed: onLeadingPressed,
+            )
+          : null,
+      automaticallyImplyLeading: false,
       title: Center(
         child: CustomText(
           text: text,
@@ -35,7 +36,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           align: TextAlign.center,
         ),
       ),
-      actions: [IconButton(icon: Icon(leadingicon), onPressed: () {})],
+      // Bug fix #2: actions shows trailingicon calling onTrailingPressed
+      actions: [
+        if (trailingicon != null)
+          IconButton(
+            icon: Icon(trailingicon),
+            onPressed: onTrailingPressed,
+          ),
+      ],
     );
   }
 

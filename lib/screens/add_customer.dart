@@ -1,21 +1,46 @@
+import 'package:daftra/cubits/customers_cubit.dart';
 import 'package:daftra/utils/label_textform.dart';
 import 'package:daftra/widgets/custom_appbar.dart';
 import 'package:daftra/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Addcustomer extends StatelessWidget {
+class Addcustomer extends StatefulWidget {
   const Addcustomer({super.key});
 
   @override
+  State<Addcustomer> createState() => _AddcustomerState();
+}
+
+class _AddcustomerState extends State<Addcustomer> {
+  final _formKey = GlobalKey<FormState>();
+  final _nameCtrl = TextEditingController();
+  final _phoneCtrl = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameCtrl.dispose();
+    _phoneCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit() async {
+    if (_formKey.currentState!.validate()) {
+      await context.read<CustomersCubit>().addCustomer(
+            _nameCtrl.text.trim(),
+            _phoneCtrl.text.trim(),
+          );
+      if (mounted) Navigator.pop(context);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: CustomAppBar(
         text: 'اضافة عميل جديد',
         leadingicon: Icons.arrow_back,
-        onLeadingPressed: () {
-          Navigator.pop(context);
-        },
+        onLeadingPressed: () => Navigator.pop(context),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -24,7 +49,7 @@ class Addcustomer extends StatelessWidget {
               ? const EdgeInsets.symmetric(vertical: 30, horizontal: 20)
               : const EdgeInsets.symmetric(vertical: 15, horizontal: 60),
           child: Form(
-            key: formKey,
+            key: _formKey,
             child: Column(
               children: [
                 Labeltextform(
@@ -34,9 +59,10 @@ class Addcustomer extends StatelessWidget {
                     Icons.person,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
+                  controller: _nameCtrl,
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return ' برجاء ادخل اسم العميل';
+                    if (value == null || value.trim().isEmpty) {
+                      return 'برجاء ادخل اسم العميل';
                     }
                     return null;
                   },
@@ -44,16 +70,17 @@ class Addcustomer extends StatelessWidget {
                 SizedBox(
                   height:
                       MediaQuery.orientationOf(context) == Orientation.portrait
-                      ? MediaQuery.sizeOf(context).width * 0.05
-                      : MediaQuery.sizeOf(context).width * 0.025,
+                          ? MediaQuery.sizeOf(context).width * 0.05
+                          : MediaQuery.sizeOf(context).width * 0.025,
                 ),
                 Labeltextform(
                   text: 'رقم الهاتف',
-                  textform: "ادخل رقم الهاتف مثل 01012345678",
+                  textform: 'ادخل رقم الهاتف مثل 01012345678',
                   suffix: Icon(
                     Icons.phone,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
+                  controller: _phoneCtrl,
                   validator: (value) {
                     final RegExp phoneRegx = RegExp(r'^01[0125][0-9]{8}$');
                     if (value == null || value.isEmpty) {
@@ -61,23 +88,22 @@ class Addcustomer extends StatelessWidget {
                     } else if (!phoneRegx.hasMatch(value)) {
                       return 'برجاء ادخال رقم هاتف صحيح';
                     }
+                    // Duplicate phone check
+                    final cubit = context.read<CustomersCubit>();
+                    if (cubit.phoneExists(value)) {
+                      return 'هذا الرقم مسجل بالفعل';
+                    }
                     return null;
                   },
                 ),
                 SizedBox(
                   height:
                       MediaQuery.orientationOf(context) == Orientation.portrait
-                      ? MediaQuery.sizeOf(context).width * 0.05
-                      : MediaQuery.sizeOf(context).width * 0.025,
+                          ? MediaQuery.sizeOf(context).width * 0.05
+                          : MediaQuery.sizeOf(context).width * 0.025,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      debugPrint("Form is valid! Proceeding to log in...");
-                    } else {
-                      debugPrint("Form is invalid.");
-                    }
-                  },
+                  onPressed: _submit,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     shape: RoundedRectangleBorder(
@@ -89,15 +115,14 @@ class Addcustomer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomText(
-                        text: "اضافة عميل",
+                        text: 'اضافة عميل',
                         isBold: true,
                         color: Theme.of(context).colorScheme.surface,
                         fontSize: 15,
                         align: TextAlign.center,
                       ),
                       SizedBox(
-                        width:
-                            MediaQuery.orientationOf(context) ==
+                        width: MediaQuery.orientationOf(context) ==
                                 Orientation.portrait
                             ? MediaQuery.sizeOf(context).width * 0.02
                             : MediaQuery.sizeOf(context).width * 0.005,
