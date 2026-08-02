@@ -6,6 +6,8 @@ class CustomTextform extends StatelessWidget {
   final bool? isObscure;
   final bool isNumber;
   final String? Function(String?)? validator;
+  final TextEditingController? controller;
+  final void Function(String)? onChanged;
 
   const CustomTextform({
     super.key,
@@ -14,11 +16,15 @@ class CustomTextform extends StatelessWidget {
     this.validator,
     this.isObscure,
     this.isNumber = false,
+    this.controller,
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      onChanged: onChanged,
       textAlign: TextAlign.right,
       obscureText: isObscure ?? false,
       keyboardType: isNumber ? TextInputType.number : null,
@@ -33,7 +39,7 @@ class CustomTextform extends StatelessWidget {
         ),
         suffixIcon: suffix,
       ),
-      validator: validator!,
+      validator: validator,
     );
   }
 }
